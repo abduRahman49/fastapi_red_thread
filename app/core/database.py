@@ -1,4 +1,3 @@
-from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
@@ -29,10 +28,10 @@ class Base(DeclarativeBase):
     pass
 
 
-# ---- Dé pendance FastAPI ( fournit une session par requ ête) ----
-async def get_db () -> AsyncSession :
- """Géné rateur de session de base de donn ées."""
- async with AsyncSessionLocal () as session:
+#---- Dépendance FastAPI (fournit une session par requête) ----#
+async def get_db () -> AsyncSession:
+ """Générateur de session de base de données."""
+ async with AsyncSessionLocal() as session:
     try:
        yield session
        await session.commit()
