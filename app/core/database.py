@@ -29,7 +29,7 @@ class Base(DeclarativeBase):
 
 
 #---- Dépendance FastAPI (fournit une session par requête) ----#
-async def get_db () -> AsyncSession:
+async def get_db() -> AsyncSession:
  """Générateur de session de base de données."""
  async with AsyncSessionLocal() as session:
     try:
