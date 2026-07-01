@@ -38,6 +38,3 @@ class DatasetResponse(DatasetCreate):
  class Config:
     from_attributes = True # Pydantic v2
 
-
-dataset = DatasetCreate(name="cours_fast_api", num_rows=3, num_features=5, format="xml")
-

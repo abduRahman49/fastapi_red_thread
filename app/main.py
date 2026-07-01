@@ -4,9 +4,12 @@ from fastapi import Response
 from fastapi.responses import RedirectResponse
 from typing import Optional, Annotated
 from enum import Enum
-from schemas.predictions import PredictionRequest, PredictionResponse
-from schemas.items import Item, ItemUpdate
-from schemas.dataset import DatasetCreate, DatasetResponse
+from app.models.experiment import Experiment
+from app.models.user import User
+from app.schemas.predictions import PredictionRequest, PredictionResponse
+from app.schemas.items import Item, ItemUpdate
+from app.schemas.dataset import DatasetCreate, DatasetResponse
+from app.routes.experiment import router as experiment_router
 
 
 predictions_db = []
@@ -30,6 +33,8 @@ app = FastAPI(
     description="Une API construite avec le framework FastAPI",
     version="1.0.0"
 )
+
+app.include_router(experiment_router)  # Inclure le routeur des expériences
 
 # Endpoints de l'app
 @app.get("/")

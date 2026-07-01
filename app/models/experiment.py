@@ -19,5 +19,5 @@ class Experiment(Base):
     accuracy: Mapped[float | None] = mapped_column(nullable=True)
     created_at: Mapped[datetime.datetime] = mapped_column(default=datetime.datetime.utcnow)
     # Clé étrangère
-    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=True)
     owner: Mapped["User"] = relationship(back_populates="experiments")
