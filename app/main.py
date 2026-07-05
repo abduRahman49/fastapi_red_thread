@@ -10,6 +10,7 @@ from app.schemas.predictions import PredictionRequest, PredictionResponse
 from app.schemas.items import Item, ItemUpdate
 from app.schemas.dataset import DatasetCreate, DatasetResponse
 from app.routes.experiment import router as experiment_router
+from app.routes.auth import router as auth_router
 
 
 predictions_db = []
@@ -35,6 +36,7 @@ app = FastAPI(
 )
 
 app.include_router(experiment_router)  # Inclure le routeur des expériences
+app.include_router(auth_router)
 
 # Endpoints de l'app
 @app.get("/")
