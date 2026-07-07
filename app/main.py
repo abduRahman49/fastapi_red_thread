@@ -11,6 +11,9 @@ from app.schemas.items import Item, ItemUpdate
 from app.schemas.dataset import DatasetCreate, DatasetResponse
 from app.routes.experiment import router as experiment_router
 from app.routes.auth import router as auth_router
+from app.middlewares.cors import configure_cors
+from app.middlewares.security_headers import SecurityHeadersMiddleware
+from app.middlewares.rate_limit import RateLimitMiddleware
 
 
 predictions_db = []
@@ -37,6 +40,9 @@ app = FastAPI(
 
 app.include_router(experiment_router)  # Inclure le routeur des expériences
 app.include_router(auth_router)
+app = configure_cors(app)  # Configurer CORS pour l'application
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(RateLimitMiddleware, calls=3, period=60)
 
 # Endpoints de l'app
 @app.get("/")

@@ -20,3 +20,11 @@ class User(Base):
     created_at : Mapped[datetime.datetime] = mapped_column(default = datetime.datetime.utcnow)
     updated_at : Mapped[datetime.datetime | None ] = mapped_column(nullable = True)
     experiments: Mapped[list["Experiment"]] = relationship(back_populates="owner")
+
+
+# Prévoir la création d'un modéle Role ainsi que d'un modèle Permissions
+# définir une relation many to one entre User et Role, et une relation many to many entre Role et Permissions
+
+# Une fois ces modèles implémenté, modifier le endpoint de login pour inclure les permissions dans le token JWT, 
+# et modifier la dépendance get_current_user pour vérifier les permissions de l'utilisateur avant d'autoriser 
+# l'accès à certaines routes.

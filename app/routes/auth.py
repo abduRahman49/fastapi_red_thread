@@ -24,10 +24,10 @@ async def register(data: UserRegister, db: DBSession):
     # Vérifier l'unicité
     if await repo.get_by_email(data.email):
         raise HTTPException(409, "Email déjà utilisé")
-    
+
     if await repo.get_by_username(data.username):
         raise HTTPException(409, "Nom d'utilisateur déjà pris")
-    
+
     # Hacher le mot de passe AVANT de stocker
     hashed_pw = hash_password(data.password)
     data = UserCreate(
@@ -54,11 +54,11 @@ async def login(
             detail="Identifiants incorrects",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     if not user.is_active:
         raise HTTPException(400, "Compte désactivé")
-    
-    access_token = create_access_token(subject=user.id)
+
+    access_token = create_access_token(subject=user.id, extra_data={"scopes": ["experiments:read"]})
     refresh_token = create_refresh_token(subject=user.id)
     return Token(
         access_token=access_token,
@@ -73,13 +73,13 @@ async def refresh_token(data: TokenRefresh, db: DBSession):
     payload = decode_token(data.refresh_token)
     if payload.get("type") != "refresh":
         raise HTTPException(401, "Token de rafraîchissement invalide")
-    
+
     user_id = payload["sub"]
     repo = UserRepository(db)
     user = await repo.get(int(user_id))
     if not user or not user.is_active:
         raise HTTPException(401, "Utilisateur introuvable ou inactif")
-    
+
     new_access = create_access_token(subject=user.id)
     new_refresh = create_refresh_token(subject=user.id)
     return Token(
