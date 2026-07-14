@@ -35,6 +35,6 @@ class DatasetResponse(DatasetCreate):
  id: int
  created_at: datetime.datetime
 
- class Config:
-    from_attributes = True # Pydantic v2
+#  class Config:
+#     from_attributes = True # Pydantic v2
 

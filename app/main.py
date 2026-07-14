@@ -42,7 +42,7 @@ app.include_router(experiment_router)  # Inclure le routeur des expériences
 app.include_router(auth_router)
 app = configure_cors(app)  # Configurer CORS pour l'application
 app.add_middleware(SecurityHeadersMiddleware)
-app.add_middleware(RateLimitMiddleware, calls=3, period=60)
+app.add_middleware(RateLimitMiddleware, calls=20, period=60)
 
 # Endpoints de l'app
 @app.get("/")

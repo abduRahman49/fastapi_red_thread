@@ -28,8 +28,9 @@ def create_access_token(
     """Génère un JWT d'accès."""
     if expires_delta is None:
         expires_delta = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-        expire = datetime.now(timezone.utc) + expires_delta
-    
+
+    expire = datetime.now(timezone.utc) + expires_delta
+
     payload = {
         "sub": str(subject),
         "exp": expire,

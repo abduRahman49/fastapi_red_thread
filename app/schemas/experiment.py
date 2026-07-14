@@ -26,5 +26,5 @@ class ExperimentResponse(BaseModel):
     created_at: datetime.datetime
     owner_id: int | None
 
-    class Config:
-        from_attributes = True
+    # class Config:
+    #     from_attributes = True
