@@ -4,8 +4,6 @@ from fastapi import Response
 from fastapi.responses import RedirectResponse
 from typing import Optional, Annotated
 from enum import Enum
-from app.models.experiment import Experiment
-from app.models.user import User
 from app.schemas.predictions import PredictionRequest, PredictionResponse
 from app.schemas.items import Item, ItemUpdate
 from app.schemas.dataset import DatasetCreate, DatasetResponse
@@ -134,7 +132,7 @@ response_model=list[Item],
 tags=["Items"],
 include_in_schema=False
 )
-def list_items():
+def list_created_items():
     """Retourne la liste des items."""
     return items_db
 

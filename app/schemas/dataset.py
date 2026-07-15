@@ -24,7 +24,7 @@ class DatasetCreate(BaseModel):
  def extension_should_be_restricted(cls, v):
    accepted = {"csv", "parquet", "json"}
    normalized_value = v.lower()
-   if not normalized_value in accepted:
+   if normalized_value not in accepted:
      raise ValueError("Le format n'est pas supporté")
    
    return normalized_value

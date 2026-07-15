@@ -1,7 +1,7 @@
 # endpoints authentification
 from typing import Annotated
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import Depends, APIRouter, HTTPException, Query, status
+from fastapi import Depends, APIRouter, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from app.core.config import settings
 
