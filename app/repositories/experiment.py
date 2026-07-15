@@ -38,4 +38,4 @@ class ExperimentRepository(BaseRepository[Experiment, ExperimentCreate, Experime
             func.count(Experiment.id).label("count")
         ).group_by(Experiment.status)
         )
-        return {row.status: row.count for row in result}
+        return {status: count for status, count in result.all()}

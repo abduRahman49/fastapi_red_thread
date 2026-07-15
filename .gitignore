@@ -144,6 +144,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.mypy_cache_local/
 .dmypy.json
 dmypy.json
 

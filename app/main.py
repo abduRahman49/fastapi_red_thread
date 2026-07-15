@@ -14,8 +14,8 @@ from app.middlewares.security_headers import SecurityHeadersMiddleware
 from app.middlewares.rate_limit import RateLimitMiddleware
 
 
-predictions_db = []
-items_db = []
+predictions_db: list[PredictionResponse] = []
+items_db: list[Item] = []
 fake_items = [
     {"name": "Foo"}, {"name": "Bar"}, {"name": "Baz"},
     {"name": "Alice"}, {"name": "Bob"}

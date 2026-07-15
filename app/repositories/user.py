@@ -2,7 +2,8 @@ from sqlalchemy import select
 
 from .base import BaseRepository
 from app.models.user import User
-from app.schemas.users import UserCreate, UserUpdate
+from app.schemas.auth import UserCreate
+from app.schemas.users import UserUpdate
 
 
 class UserRepository(BaseRepository[User, UserCreate, UserUpdate]):

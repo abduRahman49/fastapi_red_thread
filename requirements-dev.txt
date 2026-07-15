@@ -1,3 +1,5 @@
 # CI and development tooling
 ruff
-mypy
+mypy<2
+types-passlib
+types-python-jose

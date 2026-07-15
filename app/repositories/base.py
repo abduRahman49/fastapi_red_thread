@@ -1,7 +1,7 @@
 # app.repositories.base.py
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update, delete
-from typing import TypeVar, Generic, Type, Optional, Sequence
+from typing import Any, TypeVar, Generic, Type, Optional, Sequence, cast
 from pydantic import BaseModel
 
 
@@ -18,7 +18,7 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     async def get(self, id: int) -> Optional[ModelType]:
         result = await self.db.execute(
-            select(self.model).where(self.model.id == id)
+            select(self.model).where(getattr(self.model, "id") == id)
         )
         return result.scalar_one_or_none()
 
@@ -42,13 +42,13 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
         await self.db.execute(
             update(self.model)
-            .where(self.model.id == id)
+            .where(getattr(self.model, "id") == id)
             .values(**update_data)
         )
         return await self.get(id)
 
     async def delete(self, id: int) -> bool:
         result = await self.db.execute(
-            delete(self.model).where(self.model.id == id)
+            delete(self.model).where(getattr(self.model, "id") == id)
         )
-        return result.rowcount > 0
+        return cast(Any, result).rowcount > 0

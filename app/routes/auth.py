@@ -30,12 +30,12 @@ async def register(data: UserRegister, db: DBSession):
 
     # Hacher le mot de passe AVANT de stocker
     hashed_pw = hash_password(data.password)
-    data = UserCreate(
+    user_create = UserCreate(
         username=data.username,
         email=data.email,
         hashed_password=hashed_pw,
     )
-    user = await repo.create(data)
+    user = await repo.create(user_create)
     return {"message": "Compte créé avec succès", "user_id": user.id}
 
 
